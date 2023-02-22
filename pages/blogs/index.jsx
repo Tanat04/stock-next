@@ -22,7 +22,7 @@ export default function Home() {
       <Head>
         <title>Blogs</title>
       </Head>
-      <h1>Blogs</h1>
+      <h1>My Blogs</h1>
       <ul>
         {
           blogs.map(blog => {
