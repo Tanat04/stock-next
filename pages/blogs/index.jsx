@@ -54,3 +54,5 @@ export async function getServerSideProps() {
   // console.debug('blog 1', blogs)
   return { props: { blogs } }
 }
+
+//http://localhost:3000/api/blogs/articles
