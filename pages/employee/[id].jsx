@@ -11,16 +11,17 @@ export default function employeePage(props) {
       <Head>
         <title>employees</title>
       </Head>
-      <h1>{employee.first_name}</h1>
+      <h1>{employee.first_name} {employee.last_name}</h1>
       <div>
-        <p>${employee.gender}</p>
-        <p>${employee.email}</p>
-        <p>${employee.phone}</p>
-        <p>${employee.age}</p>
-        <p>${employee.job_title}</p>
-        <p>${employee.department}</p>
-        <p>${employee.salary}</p>
-        <p>${employee.years_of_experience}</p>
+        <p>Gender: {employee.gender}</p>
+        <p>Email: {employee.email}</p>
+        <p>Phone Number: {employee.phone}</p>
+        <p>Age: {employee.age}</p>
+        <p>Job: {employee.job_title}</p>
+        <p>Department: {employee.department}</p>
+        <p>Salary: {employee.salary}</p>
+        <p>Year Of Experience: {employee.years_of_experience}</p>
+        <br />
       </div>
       <Link href="/employee">Back to employee List</Link>
     </>
