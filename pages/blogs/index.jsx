@@ -22,7 +22,7 @@ export default function Home({ blogs }) {
       <Head>
         <title>Blogs</title>
       </Head>
-      <h1>Blogs</h1>
+      <h1>Blogs test</h1>
       {/* <p style={{margin:'0.4rem'}}>
       <Link href="/blogs/add">+New Blog</Link>
       </p> */}
