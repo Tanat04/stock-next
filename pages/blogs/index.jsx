@@ -23,9 +23,9 @@ export default function Home({ blogs }) {
         <title>Blogs</title>
       </Head>
       <h1>Blogs</h1>
-      <p style={{margin:'0.4rem'}}>
+      {/* <p style={{margin:'0.4rem'}}>
       <Link href="/blogs/add">+New Blog</Link>
-      </p>
+      </p> */}
       <table><tbody>
         {
           blogs.map(blog => {
