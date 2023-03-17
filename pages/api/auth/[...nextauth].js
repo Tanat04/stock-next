@@ -38,6 +38,7 @@ export const authOptions = {
       },
     }),
   ],
+  secret: "my-secret",
 };
 
 export default NextAuth(authOptions);
