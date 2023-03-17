@@ -1,10 +1,10 @@
+import dbConnect from "@/lib/dbConnect";
+import Article from "@/models/Article";
 import { connect, model, models, Schema } from "mongoose";
-const connectionString =
-  "mongodb+srv://user1:d1aVx26YFCCnVKgr@cluster0.e6jfgzx.mongodb.net/blogs";
-// const connectionString = process.env.MONGODB_URI;
 
 export default async function handler(req, res) {
-  await connect(connectionString);
+  await dbConnect();
+  // await connect(connectionString);
   console.log("req.method: ", req.method);
   console.log("req.query.id", req.query.id);
 
@@ -26,11 +26,3 @@ export default async function handler(req, res) {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
-
-const articleSchema = new Schema({
-  title: String,
-  content: String,
-});
-
-console.log("Mongoose Models", models);
-const Article = models?.article || model("article", articleSchema);

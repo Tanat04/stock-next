@@ -1,11 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Home({ blogs }) {
 
+  const { data: session } = useSession()
+
   function deleteBlog(id) {
-    fetch(`https://stock-next-flax.vercel.app/api/blogs/articles/${id}`,
+    fetch(`/api/blogs/articles/${id}`,
       {
         method: 'DELETE'
       })
@@ -22,29 +25,49 @@ export default function Home({ blogs }) {
       <Head>
         <title>Blogs</title>
       </Head>
-      <h1>Blogs test</h1>
-      {/* <p style={{margin:'0.4rem'}}>
-      <Link href="/blogs/add">+New Blog</Link>
-      </p> */}
-      <table><tbody>
-        {
-          blogs.map(blog => {
-            return (
-              <tr key={blog._id}>
-                <td>
-                  <Link href={`/blogs/${blog._id}`}>
-                    {blog.title}
-                  </Link>
-                </td>
-                <td>
-                  <button onClick={() => deleteBlog(blog._id)}>Delete</button>
-                </td>
-              </tr>
-            )
-          })
-        }
-      </tbody>
+      <h1>Blogs</h1>
+        {session && (
+          <p style={{ margin: '0.4rem' }}>
+            <Link href="/blogs/add">+New Blog</Link>
+          </p>
+        )}
+      <table>
+        <thead>
+          <tr>
+            <th style={{width: '20rem'}}>Title</th>
+            <th style={{width: '10rem'}}>Category</th>
+            <th style={{width: '10rem'}}>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            blogs.map(blog => {
+              return (
+                <tr key={blog._id}>
+                  <td >
+                    <Link href={`/blogs/${blog._id}`}>
+                      {blog.title}
+                    </Link>
+                  </td>
+                  <td style={{textAlign:'center'}}>{blog.content}</td>
+                  <td style={{textAlign:'center'}}>{blog.category}</td>
+                  <td>
+                    {session &&
+                      <>
+                        <Link href={`/blogs/update/${blog._id}`}>Update</Link>
+                        &nbsp;&nbsp;&nbsp;
+                        <button onClick={() => deleteBlog(blog._id)}>Delete</button>
+                      </>
+                }
+                  </td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
       </table>
+      <hr/>
+      <Link href="/">Home</Link>
       <p>
       </p>
 
@@ -52,10 +75,8 @@ export default function Home({ blogs }) {
   )
 }
 export async function getServerSideProps() {
-  const res = await fetch(`https://stock-next-flax.vercel.app/api/blogs/articles/`)
+  const res = await fetch(`http://localhost:3000/api/blogs/articles/`)
   const blogs = await res.json()
   // console.debug('blog 1', blogs)
   return { props: { blogs } }
 }
-
-//http://localhost:3000/api/blogs/articles
